@@ -1,0 +1,32 @@
+import socket
+
+Server_address = ('', 15253)
+Server = socket.socket()
+Server.bind(Server_address)
+Server.listen(2)
+print("Ждём подключение клиента...")
+while True:
+    c,a = Server_address()
+    data = c.recv(4096)
+    b = data.decode("UTF-8")
+    print("Получили от клиента", b)
+    if b == 'stop':
+        print("Завершение")
+        break
+    data = bytes(str(int(data) ** 10), "ascii")
+    c.send(data)
+    data = data * 10
+    c.send(data)
+    c.close()
+    
+    
+    
+    
+    import socket
+
+Server_address = ('localhost', 15253)
+Client = socket.socket()
+Client.connect(Server_address)
+Client.send(bytes("5", encoding='utf-8'))
+data = Client.recv(4096)
+print(data)
