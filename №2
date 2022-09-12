@@ -1,0 +1,5 @@
+import requests
+url = "https://www.youtube.com/"
+r = requests.get(url)
+r.encoding = "UTF-8"
+print(r.text)
